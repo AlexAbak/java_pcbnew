@@ -1,0 +1,225 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!--
+ Copyright © 2015 "Алексей Кляузер <drum@pisem.net>" Все права защищены.
+-->
+
+<!--
+ This file is part of java_pcbnew.
+
+ java_pcbnew is free software: you can redistribute it and/or modify it
+ under the terms of the GNU Affero General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ java_pcbnew is distributed in the hope that it will be useful, but
+ WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU Affero General Public License for more details.
+
+ You should have received a copy of the GNU Affero General Public License
+ along with java_pcbnew.  If not, see <http://www.gnu.org/licenses/>.
+-->
+
+<!-- 
+ Этот файл — часть java_pcbnew.
+
+ java_pcbnew - свободная программа: вы можете перераспространять ее и/или
+ изменять ее на условиях Афферо Стандартной общественной лицензии GNU в
+ том виде, в каком она была опубликована Фондом свободного программного
+ обеспечения; либо версии 3 лицензии, либо (по вашему выбору) любой более
+ поздней версии.
+
+ java_pcbnew распространяется в надежде, что она будет полезной, но БЕЗО
+ ВСЯКИХ ГАРАНТИЙ; даже без неявной гарантии ТОВАРНОГО ВИДА или ПРИГОДНОСТИ
+ ДЛЯ ОПРЕДЕЛЕННЫХ ЦЕЛЕЙ. Подробнее см. в Афферо Стандартной общественной
+ лицензии GNU.
+
+ Вы должны были получить копию Афферо Стандартной общественной лицензии GNU
+ вместе с этой программой. Если это не так, см.
+ <http://www.gnu.org/licenses/>.
+-->
+
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>ru.myweek_end.pcbnew</groupId>
+	<artifactId>root</artifactId>
+	<version>version</version>
+	<packaging>pom</packaging>
+
+	<properties>
+		<product.version>0.0.1</product.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<url>https://myweek-end.ru/pcbnew</url>
+	<name>Pcbnew Java. root.</name>
+	<description>Java классы для работы с файлами Pcbnew. Корневой проект.</description>
+
+	<organization>
+		<name>Моя неделя завершилась</name>
+		<url>https://myweek-end.ru/</url>
+	</organization>
+	<developers>
+		<developer>
+			<name>Алексей Кляузер</name>
+			<email>drum@pisem.net</email>
+			<url>http://alexabak.github.io/</url>
+			<organization>Моя неделя завершилась</organization>
+			<organizationUrl>https://myweek-end.ru/</organizationUrl>
+			<timezone>MSK (UTC+3)</timezone>
+		</developer>
+	</developers>
+
+	<scm>
+		<url>scm:git:https://github.com/AlexAbak/java_pcbnew.git</url>
+		<developerConnection>scm:git:git@github.com:AlexAbak/java_pcbnew.git</developerConnection>
+	</scm>
+	<issueManagement>
+		<url>https://github.com/AlexAbak/java_pcbnew/issues</url>
+		<system>github</system>
+	</issueManagement>
+	<ciManagement>
+		<url>https://build.myweek-end.ru/job/java_pcbnew/</url>
+		<system>jenkins</system>
+		<notifiers>
+			<notifier>
+				<address>https://build.myweek-end.ru/job/java_pcbnew/rssAll</address>
+				<type>rss</type>
+			</notifier>
+			<notifier>
+				<address>https://build.myweek-end.ru/job/java_pcbnew/rssFailed</address>
+				<sendOnSuccess>false</sendOnSuccess>
+				<type>rss</type>
+			</notifier>
+		</notifiers>
+	</ciManagement>
+
+	<distributionManagement>
+		<repository>
+			<id>ssh-repository</id>
+			<url>scpexe://myweek-end.ru/home/mvn/repository</url>
+		</repository>
+		<site>
+			<id>ssh-site</id>
+			<url>scpexe://myweek-end.ru/home/mvn/site</url>
+		</site>
+	</distributionManagement>
+
+	<modules>
+		<module>parser</module>
+	</modules>
+
+	<licenses>
+		<license>
+			<name>GNU AFFERO GENERAL PUBLIC LICENSE Version 3, 19 November 2007</name>
+			<url>http://www.gnu.org/licenses/agpl-3.0.html</url>
+		</license>
+	</licenses>
+
+	<build>
+
+		<extensions>
+			<extension>
+				<groupId>org.apache.maven.wagon</groupId>
+				<artifactId>wagon-ssh-external</artifactId>
+				<version>2.9</version>
+			</extension>
+		</extensions>
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<version>1.8</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>2.5.4</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>2.10</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.5.2</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
+		<plugins>
+
+			<plugin>
+				<groupId>ru.concerteza.buildnumber</groupId>
+				<artifactId>maven-jgit-buildnumber-plugin</artifactId>
+				<version>1.2.10</version>
+				<executions>
+					<execution>
+						<id>gitBuildNumber</id>
+						<goals>
+							<goal>extract-buildnumber</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+				<version>2.2</version>
+				<executions>
+					<execution>
+						<id>setVersion</id>
+						<goals>
+							<goal>set</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<newVersion>${product.version}.${git.commitsCount}</newVersion>
+				</configuration>
+			</plugin>
+ 
+			<plugin>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>2.8</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.10.3</version>
+				<executions>
+					<execution>
+						<id>maven-javadoc-plugin</id>
+						<phase>site</phase>
+						<goals>
+							<goal>javadoc</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<aggregate>true</aggregate>
+					<charset>UTF-8</charset>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-site-plugin</artifactId>
+				<version>3.4</version>
+				<configuration>
+					<locales>ru</locales>
+				</configuration>
+			</plugin>
+
+		</plugins>
+
+	</build>
+
+</project>
