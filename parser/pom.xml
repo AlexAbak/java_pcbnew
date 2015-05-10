@@ -115,10 +115,17 @@
 				<version>2.10.3</version>
 				<executions>
 					<execution>
-						<id>maven-javadoc-plugin</id>
+						<id>maven-javadoc-site</id>
 						<phase>site</phase>
 						<goals>
 							<goal>javadoc</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>maven-javadoc-jar</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
 						</goals>
 					</execution>
 				</executions>
